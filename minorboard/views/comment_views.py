@@ -59,10 +59,10 @@ def comment_delete_question(request, comment_id):
     comment = get_object_or_404(CommentMinor, pk=comment_id)
     if request.user != comment.author_minor:
         messages.error(request, '댓글삭제권한이 없습니다')
-        return redirect('minorboard:detail', question_id=comment.question_id)
+        return redirect('minorboard:detail', question_id=comment.question_information_id)
     else:
         comment.delete()
-    return redirect('minorboard:detail', question_id=comment.question_id)
+    return redirect('minorboard:detail', question_id=comment.question_information_id)
 
 @login_required(login_url='common:login')
 def comment_create_answer(request, answer_id):
