@@ -17,7 +17,7 @@ def answer_create(request, question_id):
         if form.is_valid():
             answer = form.save(commit=False)
             answer.author_free = request.user  # 추가한 속성 author 적용, reqeust.user는 현재 로그인한 계정의 User모델 객체
-            answer.create_dat_free = timezone.now()
+            answer.create_date_free = timezone.now()
             answer.question_free = question
             answer.save()
             return redirect('{}#answer_{}'.format(
