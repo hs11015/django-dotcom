@@ -59,10 +59,10 @@ def comment_delete_question(request, comment_id):
     comment = get_object_or_404(CommentDouble, pk=comment_id)
     if request.user != comment.author_double:
         messages.error(request, '댓글삭제권한이 없습니다')
-        return redirect('doubleboard:detail', question_id=comment.question_id)
+        return redirect('doubleboard:detail', question_id=comment.question_double_id)
     else:
         comment.delete()
-    return redirect('doubleboard:detail', question_id=comment.question_id)
+    return redirect('doubleboard:detail', question_id=comment.question_double_id)
 
 @login_required(login_url='common:login')
 def comment_create_answer(request, answer_id):

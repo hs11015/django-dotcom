@@ -59,10 +59,10 @@ def comment_delete_question(request, comment_id):
     comment = get_object_or_404(CommentFree, pk=comment_id)
     if request.user != comment.author_free:
         messages.error(request, '댓글삭제권한이 없습니다')
-        return redirect('free:detail', question_id=comment.question_id)
+        return redirect('free:detail', question_id=comment.question_free_id)
     else:
         comment.delete()
-    return redirect('free:detail', question_id=comment.question_id)
+    return redirect('free:detail', question_id=comment.question_free_id)
 
 @login_required(login_url='common:login')
 def comment_create_answer(request, answer_id):
