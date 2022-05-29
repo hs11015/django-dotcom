@@ -42,6 +42,7 @@
                            data-uri="{% url 'minorboard:question_delete' question.id  %}">삭제</a> <!--data-uri 속성은 jQuery에서 $(this).data('uri') 와 같이 사용하여 그 값을 얻을 수 있음-->
                     </div>
                     {% endif %}
+                    {% endif %}
 
                     <!-- 질문 댓글 Start -->
                     {% if question.commentminor_set.count > 0 %}
@@ -159,7 +160,6 @@
         <input type="submit" value="답변등록" class="btn btn-primary">
     </form>
 </div>
-{% endif %}  <!--여기 수정해야돼 글쓴이 아니면 답변등록 안됨-->
 {% endblock %}
 
 {% block script %}
