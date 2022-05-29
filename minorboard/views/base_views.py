@@ -15,19 +15,19 @@ def index(request): #request는 장고 프레임워크에 의해 자동으로 �
 
     # 정렬
     if so == 'recommend':
-        question_list = QuestionMinor.objects.annotate(num_voter=Count('voter_minor')).order_by('-num_voter_minor', '-create_date_minor') #추천수는 장고의 annotate를 이용하여 Count함수를 통해 구할수있음.
+        question_list = QuestionMinor.objects.annotate(num_voter_minor=Count('voter_minor')).order_by('-num_voter_minor', '-create_date_minor') #추천수는 장고의 annotate를 이용하여 Count함수를 통해 구할수있음.
     elif so == 'popular':
-        question_list = QuestionMinor.objects.annotate(num_answer=Count('answer_minor')).order_by('-num_answer_minor', '-create_date_minor')
+        question_list = QuestionMinor.objects.annotate(num_answer_minor=Count('answerminor')).order_by('-num_answer_minor', '-create_date_minor')
     else:  # recent
         question_list = QuestionMinor.objects.order_by('-create_date_minor')
 
     # 조회
     if kw:
         question_list = question_list.filter( #filter 함수안에서 모델속성에 접근할떄는 __이용시 하위 속성에 접근가능.
-            Q(subject__icontains=kw) |  # 제목검색, icontains대신 contains사용시 대소문자 구분.
-            Q(content__icontains=kw) |  # 내용검색
-            Q(author__username__icontains=kw) |  # 질문 글쓴이검색
-            Q(answer__author__username__icontains=kw)  # 답변 글쓴이검색
+            Q(subject_minor__icontains=kw) |  # 제목검색, icontains대신 contains사용시 대소문자 구분.
+            Q(content_minor__icontains=kw) |  # 내용검색
+            Q(author_minor__username__icontains=kw) |  # 질문 글쓴이검색
+            Q(answerminor__author_minor__username__icontains=kw)  # 답변 글쓴이검색
         ).distinct()
 
     # 페이징처리
